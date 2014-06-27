@@ -13,4 +13,4 @@ grunt serve
 ## How to test (both unit tests and e2e tests)
 ``` bash
 grunt test
-```
+``` 
