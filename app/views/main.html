@@ -1,0 +1,29 @@
+<div class="well"ng-controller="TodoCtrl">
+  <h3>Total todos: {{totalTodos()}}</h3>
+  <ul class="list-unstyled">
+    <li ng-repeat="todo in todos">
+      <input type="checkbox" ng-model="todo.done">
+      <span class="done-{{todo.done}}">{{todo.text}}</span>
+    </li>
+  </ul>
+
+  <form class="form-horizontal" ng-submit="addTodo()">
+    <div class="input-group">
+      <input type="text" class="form-control" ng-model="formTodoText" required>
+      <span class="input-group-btn">
+        <button id="addTodoButton" type="submit" class="btn btn-primary">
+          <span class="glyphicon glyphicon-plus"></span> Add
+        </button>
+      </span>
+    </div>
+  </form>
+
+  <p>
+  <br>
+  <button type="button" class="btn btn-warning" ng-click="clearCompleted()">
+    <span class="glyphicon glyphicon-trash"></span>
+    Clear completed tasks
+  </button>
+  </p>
+
+</div>
