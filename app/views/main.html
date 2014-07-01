@@ -1,15 +1,17 @@
-<div class="well"ng-controller="TodoCtrl">
+<div class="well" ng-controller="TodoCtrl">
   <h3>Total todos: {{totalTodos()}}</h3>
-  <ul class="list-unstyled">
+  <ul class="list-unstyled todo-list">
     <li ng-repeat="todo in todos">
-      <input type="checkbox" ng-model="todo.done">
+      <input type="checkbox" ng-model="todo.done" ng-change="toggleDone(todo, this)">
       <span class="done-{{todo.done}}">{{todo.text}}</span>
+      <span ng-show="containsAd(todo)">AD</span>
+      <button type="button" class="btn btn-danger btn-xs btn-error pull-right" ng-click="delete(todo)">X</button>
     </li>
   </ul>
 
-  <form class="form-horizontal" ng-submit="addTodo()">
+  <form class="form-horizontal" ng-submit="save()">
     <div class="input-group">
-      <input type="text" class="form-control" ng-model="formTodoText" required>
+      <input type="text" class="form-control" ng-model="todo.text" required>
       <span class="input-group-btn">
         <button id="addTodoButton" type="submit" class="btn btn-primary">
           <span class="glyphicon glyphicon-plus"></span> Add
@@ -24,6 +26,18 @@
     <span class="glyphicon glyphicon-trash"></span>
     Clear completed tasks
   </button>
+
+  <button type="button" class="btn btn-success" ng-click="refreshTodos()">
+    <span class="glyphicon glyphicon-refresh"></span>
+    Refresh list
+  </button>
   </p>
+
+  <div class="progress progress-striped active" ng-show="refreshing()">
+    <div class="progress-bar progress-bar-info"  role="progressbar" style="width: 100%;">
+      Currently {{currentRequests}} requests pending
+      <span class="sr-only">Refreshing...</span>
+    </div>
+  </div>
 
 </div>

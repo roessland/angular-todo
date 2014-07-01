@@ -46,6 +46,8 @@
     <script src="bower_components/json3/lib/json3.min.js"></script>
     <![endif]-->
 
+    <script src="bower_components/underscore/underscore.js"></script>
+
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
@@ -61,11 +63,15 @@
     <!-- endbower -->
     <!-- endbuild -->
 
+    <script src="bower_components/angular-underscore-module/angular-underscore-module.js"></script>
+
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/main.js"></script>
         <script src="scripts/controllers/about.js"></script>
         <script src="scripts/controllers/todo.js"></script>
+        <script src="scripts/services/todo.js"></script>
+        <script src="scripts/providers/todo.js"></script>
         <!-- endbuild -->
 </body>
 </html>

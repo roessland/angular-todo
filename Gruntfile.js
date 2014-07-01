@@ -71,11 +71,27 @@ module.exports = function (grunt) {
         hostname: 'localhost',
         livereload: 35729
       },
+      proxies: [{
+        context: '/api',
+        host: 'localhost',
+        port: 5000,
+        changeOrigin: true,
+        timeout: 1000,
+        rewrite: {
+          '^/api': ''
+        },
+      }],
       livereload: {
         options: {
           open: true,
-          middleware: function (connect) {
-            return [
+          middleware: function (connect, options) {
+
+            if (!Array.isArray(options.base)) {
+              options.base = [options.base];
+            }
+
+            var middlewares = [
+              require('grunt-connect-proxy/lib/utils').proxyRequest,
               connect.static('.tmp'),
               connect().use(
                 '/bower_components',
@@ -83,6 +99,8 @@ module.exports = function (grunt) {
               ),
               connect.static(appConfig.app)
             ];
+
+            return middlewares;
           }
         }
       },
@@ -360,7 +378,7 @@ module.exports = function (grunt) {
     protractor: {
       options: {
         keepAlive: true,
-        configFile: "protractor_conf.js",
+        configFile: 'protractor_conf.js',
        },
       run: {},
     },
@@ -378,6 +396,7 @@ module.exports = function (grunt) {
       'wiredep',
       'concurrent:server',
       'autoprefixer',
+      'configureProxies:server',
       'connect:livereload',
       'watch'
     ]);
