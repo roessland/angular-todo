@@ -71,16 +71,6 @@ module.exports = function (grunt) {
         hostname: 'localhost',
         livereload: 35729
       },
-      proxies: [{
-        context: '/api',
-        host: 'localhost',
-        port: 5000,
-        changeOrigin: true,
-        timeout: 1000,
-        rewrite: {
-          '^/api': ''
-        },
-      }],
       livereload: {
         options: {
           open: true,
@@ -91,7 +81,6 @@ module.exports = function (grunt) {
             }
 
             var middlewares = [
-              require('grunt-connect-proxy/lib/utils').proxyRequest,
               connect.static('.tmp'),
               connect().use(
                 '/bower_components',

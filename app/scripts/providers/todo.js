@@ -3,7 +3,7 @@
 angular.module('angularTodoApp')
   .provider('Todo', function() {
     this.$get = ['$resource', function($resource) {
-      var Todo = $resource('http://localhost:9000/api/todos/:_id', {}, {
+      var Todo = $resource('http://localhost:5000/todos/:_id', {}, {
         save: {
           method: 'POST'
         },
